@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/demos_spring_mybatis
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 16

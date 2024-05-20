@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demos.persist.mtm.MarkInfoPersist">
+
+  <resultMap id="BaseResultMap" type="demos.domains.mtm.MarkInfo">
+    <id property="mainSole" column="main_sole" jdbcType="BIGINT"/>
+    <result property="saveTime" column="save_time" jdbcType="TIMESTAMP"/>
+    <result property="lastTime" column="last_save" jdbcType="TIMESTAMP"/>
+    <result property="saveUser" column="save_user" jdbcType="VARCHAR"/>
+    <result property="lastUser" column="last_user" jdbcType="VARCHAR"/>
+    <result property="ableFlag" column="able_flag" jdbcType="TINYINT"/>
+    <result property="lockFlag" column="lock_flag" jdbcType="TINYINT"/>
+    <result property="highSole" column="high_sole" jdbcType="BIGINT"/>
+    <result property="markName" column="mark_name" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    main_sole,save_time,last_save,
+        save_user,last_user,able_flag,
+        lock_flag,high_sole,mark_name
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mtm_mark_info
+    where main_sole = #{mainSole,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete
+    from mtm_mark_info
+    where main_sole = #{mainSole,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="main_sole" keyProperty="mainSole" parameterType="demos.domains.mtm.MarkInfo"
+          useGeneratedKeys="true">
+    insert into mtm_mark_info
+    ( main_sole, save_time, last_save
+    , save_user, last_user, able_flag
+    , lock_flag, high_sole, mark_name)
+    values ( #{mainSole,jdbcType=BIGINT}, #{saveTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}
+           , #{saveUser,jdbcType=VARCHAR}, #{lastUser,jdbcType=VARCHAR}, #{ableFlag,jdbcType=TINYINT}
+           , #{lockFlag,jdbcType=TINYINT}, #{highSole,jdbcType=BIGINT}, #{markName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="main_sole" keyProperty="mainSole" parameterType="demos.domains.mtm.MarkInfo"
+          useGeneratedKeys="true">
+    insert into mtm_mark_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mainSole != null">main_sole,</if>
+      <if test="saveTime != null">save_time,</if>
+      <if test="lastTime != null">last_save,</if>
+      <if test="saveUser != null">save_user,</if>
+      <if test="lastUser != null">last_user,</if>
+      <if test="ableFlag != null">able_flag,</if>
+      <if test="lockFlag != null">lock_flag,</if>
+      <if test="highSole != null">high_sole,</if>
+      <if test="markName != null">mark_name,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mainSole != null">#{mainSole,jdbcType=BIGINT},</if>
+      <if test="saveTime != null">#{saveTime,jdbcType=TIMESTAMP},</if>
+      <if test="lastTime != null">#{lastTime,jdbcType=TIMESTAMP},</if>
+      <if test="saveUser != null">#{saveUser,jdbcType=VARCHAR},</if>
+      <if test="lastUser != null">#{lastUser,jdbcType=VARCHAR},</if>
+      <if test="ableFlag != null">#{ableFlag,jdbcType=TINYINT},</if>
+      <if test="lockFlag != null">#{lockFlag,jdbcType=TINYINT},</if>
+      <if test="highSole != null">#{highSole,jdbcType=BIGINT},</if>
+      <if test="markName != null">#{markName,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demos.domains.mtm.MarkInfo">
+    update mtm_mark_info
+    <set>
+      <if test="saveTime != null">
+        save_time = #{saveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null">
+        last_save = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saveUser != null">
+        save_user = #{saveUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUser != null">
+        last_user = #{lastUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ableFlag != null">
+        able_flag = #{ableFlag,jdbcType=TINYINT},
+      </if>
+      <if test="lockFlag != null">
+        lock_flag = #{lockFlag,jdbcType=TINYINT},
+      </if>
+      <if test="highSole != null">
+        high_sole = #{highSole,jdbcType=BIGINT},
+      </if>
+      <if test="markName != null">
+        mark_name = #{markName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where main_sole = #{mainSole,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demos.domains.mtm.MarkInfo">
+    update mtm_mark_info
+    set save_time = #{saveTime,jdbcType=TIMESTAMP},
+        last_save = #{lastTime,jdbcType=TIMESTAMP},
+        save_user = #{saveUser,jdbcType=VARCHAR},
+        last_user = #{lastUser,jdbcType=VARCHAR},
+        able_flag = #{ableFlag,jdbcType=TINYINT},
+        lock_flag = #{lockFlag,jdbcType=TINYINT},
+        high_sole = #{highSole,jdbcType=BIGINT},
+        mark_name = #{markName,jdbcType=VARCHAR}
+    where main_sole = #{mainSole,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: spring-mybatis
+  main:
+    banner-mode: off
+  profiles:
+    active:
+      - uat
+
+server:
+  port: 57801
+
+mybatis:
+  mapper-locations:
+    - classpath:/mappers/**/**Mappers.xml
+    - classpath:/mappers/**/**Mapper.xml
+    - classpath:/mapper/**/**Mappers.xml
+    - classpath:/mapper/**/**Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-prefix: mybatis-logs
