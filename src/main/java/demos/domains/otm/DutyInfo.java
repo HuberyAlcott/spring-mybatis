@@ -15,4 +15,7 @@ public class DutyInfo extends BaseData {
 
   /** 权限名称 */
   private String dutyName;
+
+  /** 角色编号 */
+  private Long roleSole;
 }

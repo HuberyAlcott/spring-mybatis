@@ -16,17 +16,24 @@
     <result property="noteText" column="note_text" jdbcType="VARCHAR"/>
   </resultMap>
 
-  <sql id="Base_Column_List">
-    main_sole,save_time,last_save,
-        save_user,last_user,able_flag,
-        lock_flag,high_sole,note_text
+  <sql id="selectFullColumn">
+    select main_sole,
+           save_time,
+           last_save,
+           save_user,
+           last_user,
+           able_flag,
+           lock_flag,
+           high_sole,
+           note_text
+    from mto_note_info
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from mto_note_info
-    where main_sole = #{mainSole,jdbcType=BIGINT}
+    <include refid="selectFullColumn"/>
+    <where>
+      main_sole = #{mainSole,jdbcType=BIGINT}
+    </where>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

@@ -18,6 +18,8 @@ public interface RoleInfoPersist extends BaseSave<RoleInfo> {
 
   int insertSelective(RoleInfo record);
 
+  RoleInfo selectFullData(Long id);
+
   RoleInfo selectByPrimaryKey(Long id);
 
   int updateByPrimaryKeySelective(RoleInfo record);

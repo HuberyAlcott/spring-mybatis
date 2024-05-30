@@ -16,6 +16,29 @@
     <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
   </resultMap>
 
+  <resultMap id="BindResultMap" type="demos.domains.otm.RoleInfo">
+    <id property="mainSole" column="main_sole" jdbcType="BIGINT"/>
+    <result property="saveTime" column="save_time" jdbcType="TIMESTAMP"/>
+    <result property="lastTime" column="last_save" jdbcType="TIMESTAMP"/>
+    <result property="saveUser" column="save_user" jdbcType="VARCHAR"/>
+    <result property="lastUser" column="last_user" jdbcType="VARCHAR"/>
+    <result property="ableFlag" column="able_flag" jdbcType="TINYINT"/>
+    <result property="lockFlag" column="lock_flag" jdbcType="TINYINT"/>
+    <result property="highSole" column="high_sole" jdbcType="BIGINT"/>
+    <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+    <collection property="dutyList" ofType="demos.domains.otm.DutyInfo">
+      <id property="mainSole" column="main_sole" jdbcType="BIGINT"/>
+      <result property="saveTime" column="save_time" jdbcType="TIMESTAMP"/>
+      <result property="lastTime" column="last_save" jdbcType="TIMESTAMP"/>
+      <result property="saveUser" column="save_user" jdbcType="VARCHAR"/>
+      <result property="lastUser" column="last_user" jdbcType="VARCHAR"/>
+      <result property="ableFlag" column="able_flag" jdbcType="TINYINT"/>
+      <result property="lockFlag" column="lock_flag" jdbcType="TINYINT"/>
+      <result property="highSole" column="high_sole" jdbcType="BIGINT"/>
+      <result property="dutyName" column="duty_name" jdbcType="VARCHAR"/>
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List">
     main_sole,save_time,last_save,
         save_user,last_user,able_flag,
@@ -27,6 +50,9 @@
     <include refid="Base_Column_List"/>
     from otm_role_info
     where main_sole = #{mainSole,jdbcType=BIGINT}
+  </select>
+  <select id="selectFullData" resultMap="BindResultMap">
+    select * from otm_role_info as ri left join otm_duty_info di on ri.main_sole =di.role_sole;
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
